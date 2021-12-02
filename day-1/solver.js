@@ -4,13 +4,13 @@ const inputAsArray = fs.readFileSync("./input.txt", null).toString().split("\n")
 
 let ans = 0;
 let prev = Number(inputAsArray[0]) 
-
+ 
 for (let i = 1; i < inputAsArray.length; i++) {
-  const current = Number(inputAsArray[i]);
-  if(current > prev) {
-    ans++;
-  }
-  prev = current;
+	const current = Number(inputAsArray[i]);
+	if (current > prev) {
+		ans++;
+	}
+	prev = current;
 }
 
 // need to keep track of three items

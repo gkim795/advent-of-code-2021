@@ -1,0 +1,7 @@
+{
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "prettier.singleQuote": true,
+  "prettier.useTabs": true,
+  "editor.formatOnSaveMode": "modifications"
+}
