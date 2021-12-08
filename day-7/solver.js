@@ -23,23 +23,16 @@ const testAsArray = fs.readFileSync('./test.txt', null).toString().split(',').ma
  */
 
 const partOne = (input) => {
-  let [minDistance, minValue] = [Infinity, -1];
+  let sorted = [...input].sort((a, b) => a - b)
+  let middle = Math.floor(sorted.length /2)
+  let oddAns = sorted[middle];
+  let evenAns = ((sorted[middle] + sorted[middle - 1])/2)
+  
 
-  for (let i = 0; i < input.length; i++) {
-    let current = input[i];
-    let currentDistanceSum = 0;
-    for (let m = 0; m < input.length; m++) {
-      currentDistanceSum += Math.abs(input[m] - current)
-    }
+  let trueMedian = middle % 2 === 0 ? evenAns : oddAns;
 
-    if(currentDistanceSum < minDistance) {
-      minValue = current;
-      minDistance = currentDistanceSum;
-    }
+  return sorted.reduce((a, b) => {return a + Math.abs(trueMedian - b)}, 0)
 
-  }
-
-  return minDistance
 }
 
 /**
@@ -66,30 +59,18 @@ const partTwo = (input) => {
   let [minDistance, minValue] = [Infinity, -1];
 
   let max = Math.max(...input)
-  let min = Math.min(...input)
-
-  for (let i = min; i <= max; i++) {
-    let currentDistanceSum = 0;
-    for (let m = 0; m < input.length; m++) {
-      let start = Math.min(input[m], i);
-      let end = Math.max(input[m], i);
-
-      let sum = sumOfIntegers(start, end)
-
-
-      currentDistanceSum += sum
-    }
-
-    if(currentDistanceSum < minDistance) {
-      minValue = i;
-      minDistance = currentDistanceSum;
-    }
-
-  }
-
  
 
-  return minDistance
+  let sum = input.reduce((a, b) => {return a + b}, 0)
+  let avg = Math.ceil(sum / input.length)
+  
+  let ans =  input.reduce((a, b) => {
+    let sum = sumOfIntegers(Math.min(b, avg), Math.max(b, avg))
+    return sum + a
+  }, 0)
+  console.log({ans, avg})
+
+  return ans
 }
 
 const main = () => {
@@ -102,7 +83,7 @@ const main = () => {
       partTwo: (partTwo(testAsArray) === 168)
     },
     partOne: partOne(input),
-    partTwo: partTwo(input),
+   partTwo: partTwo(input),
   }
 }
 
