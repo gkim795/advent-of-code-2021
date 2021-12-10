@@ -28,10 +28,10 @@ const testData = readFileSync('./test.txt', null).toString().split('\n')
 }
 
 const value = {
-  ")": 3,
-  "]": 57,
-  "}": 1197,
-  ">": 25137
+  ')': 3,
+  '}': 57,
+  ']': 1197,
+  '>': 25137,
 }
 
 let openSet = new Set(["(", "{", "<", "["]);
